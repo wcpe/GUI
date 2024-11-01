@@ -10,6 +10,7 @@ import moe.him188.gui.window.listener.action.ClickListenerSimple;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * 能监听点击事件的按钮, 注意这个按钮只能用于 {@link ResponsibleFormWindowSimple},
@@ -20,10 +21,15 @@ import java.util.Objects;
  * @author Him188moe @ GUI Project
  */
 public class ResponsibleButton extends ElementButton {
-    private transient ClickListener listener = null;
+    private transient Consumer<Player> listener = null;
 
     public ResponsibleButton(@NotNull String text) {
         super(Objects.requireNonNull(text));
+    }
+
+    public ResponsibleButton(@NotNull String text, @NotNull Consumer<Player> onClicked) {
+        this(text);
+        listener = onClicked;
     }
 
     public ResponsibleButton(@NotNull String text, @NotNull ClickListener onClicked) {
@@ -48,14 +54,9 @@ public class ResponsibleButton extends ElementButton {
         this(text, image, (ClickListener) onClicked);
     }
 
-    public ResponsibleButton setClickListener(@NotNull ClickListener listener) {
+    public void setClickListener(@NotNull Consumer<Player> listener) {
         Objects.requireNonNull(listener);
         this.listener = listener;
-        return this;
-    }
-
-    public ResponsibleButton setClickListener(@NotNull ClickListenerSimple listener) {
-        return this.setClickListener((ClickListener) listener);
     }
 
     public void callClicked(@NotNull Player player) {
@@ -64,7 +65,7 @@ public class ResponsibleButton extends ElementButton {
         }
     }
 
-    public ClickListener getClickListener() {
+    public Consumer<Player> getClickListener() {
         return listener;
     }
 }

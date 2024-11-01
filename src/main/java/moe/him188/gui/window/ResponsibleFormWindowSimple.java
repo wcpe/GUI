@@ -11,7 +11,6 @@ import cn.nukkit.form.window.FormWindowSimple;
 import com.google.gson.Gson;
 import moe.him188.gui.element.ResponsibleButton;
 import moe.him188.gui.utils.Backable;
-import moe.him188.gui.window.listener.action.ClickListener;
 import moe.him188.gui.window.listener.action.ClickListenerSimple;
 import moe.him188.gui.window.listener.response.ResponseListenerSimple;
 import org.jetbrains.annotations.NotNull;
@@ -148,6 +147,7 @@ public class ResponsibleFormWindowSimple extends FormWindowSimple implements Bac
         super.addButton(new ElementButton(name));
     }
 
+
     /**
      * 快速添加 {@link ResponsibleButton}. <br>
      * Fast adding {@link ResponsibleButton}
@@ -155,7 +155,7 @@ public class ResponsibleFormWindowSimple extends FormWindowSimple implements Bac
      * @param name          button name
      * @param clickListener listener
      */
-    public void addButton(String name, @NotNull ClickListener clickListener) {
+    public void addButton(String name, @NotNull ClickListenerSimple clickListener) {
         super.addButton(new ResponsibleButton(name, clickListener));
     }
 
@@ -166,7 +166,7 @@ public class ResponsibleFormWindowSimple extends FormWindowSimple implements Bac
      * @param name          button name
      * @param clickListener listener
      */
-    public void addButton(String name, @NotNull ClickListenerSimple clickListener) {
+    public void addButton(String name, @NotNull Consumer<Player> clickListener) {
         super.addButton(new ResponsibleButton(name, clickListener));
     }
 
